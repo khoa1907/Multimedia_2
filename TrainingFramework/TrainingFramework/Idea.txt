@@ -1,0 +1,22 @@
+Game top down shoot em up theo kiểu Soul Knight hoặc Nuclear Throne
+Lối chơi giống một game cơ bản + một cơ chế riêng (gimmick)
+Ý tưởng gimmick:
+1. Parry
+- Parry để phản đạn lại địch
+- Số lượng đạn của người chơi ít, mỗi lần parry sẽ hồi đạn
+- Đạn parry trúng đối phương có thể gây khoặc không gây stun
+2. Dodgeball
+- Người chơi không dùng súng, dùng một quả bóng và một cây gậy
+- Bóng được phát bởi người chơi, và trong một radius nhất định từ tâm sẽ có thể đuổi theo kẻ địch
+- Sau khi trúng kẻ địch, bóng sẽ quay lại, và người chơi có thể sẽ đánh tiếp để tạo combo
+- Combo càng cao, bóng di chuyển càng nhanh và radius để detect kẻ địch sẽ nhỏ lại
+- Nếu bóng không trúng địch, hoặc người chơi không đánh kịp trong lúc quay lại sẽ mất combo
+- Với cách di chuyển của bóng, tùy vào độ phức tạp mô phỏng vật lý có thể dùng box2d
+
+
+Cơ chế chính:
+Top down
+WASD to move
+Mouse to point and shoot
+Tạo level random với các phòng xếp cạnh nhau (như Soul Knight)
+Có thể sẽ không có loot

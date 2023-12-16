@@ -2,6 +2,7 @@
 #include "Entity.h"
 #include "Player.h"
 #include <list>
+#include "ResourceManagers.h"
 class GSPlay;
 class Enemy : public Entity {
 private:
@@ -11,7 +12,9 @@ private:
 	std::shared_ptr<SpriteAnimation> obj;
 	std::shared_ptr<SpriteAnimation> obj2;
 	std::shared_ptr<Sound> m_Sound;
-
+	
+	std::list<std::shared_ptr<SpriteAnimation>>	m_listBlow;
+	std::shared_ptr<SpriteAnimation> blow;
 
 	GSPlay* m_currentGame;
 	float m_shootCooldown;

@@ -85,6 +85,15 @@ void Player::Init() {
     m_barContainer->Set2DPosition(20, 35);
     m_barFill->SetSize(300, 30);
     m_barFill->Set2DPosition(50, 35);
+
+    texture = ResourceManagers::GetInstance()->GetTexture("btn_die.tga");
+    blow = std::make_shared<SpriteAnimation>(texture, 3, 4, 3, 0.2f);
+    blow->SetFlip(SDL_FLIP_NONE);
+    //Vector3 i_position = this->GetPosition();
+    blow->Set2DPosition(200, 200);
+    blow->SetSize(70, 70);
+    m_listBlow.push_back(blow);
+    blow->setActive(false);
 }
 void Player::ProcessInput(int keyPress) {
     if (m_currentFrozenCooldown > 0) return;
@@ -145,6 +154,11 @@ void Player::CheckCollision(Entity* other)
             //m_bulletStats.bulletSpriteDir = BulletDataManager::GetInstance()->m_bulletData[((Bullet*)(other))->m_bulletDataIndex].bulletSpriteDir;
             //m_bulletStats.frames = BulletDataManager::GetInstance()->m_bulletData[((Bullet*)(other))->m_bulletDataIndex].frames;
         }
+        for (auto it : m_listBlow) { 
+            it->setActive(true);
+            it->Set2DPosition(other->GetPosition().x, other->GetPosition().y);
+            break;
+        }
 
     }
     Entity::CheckCollision(other);
@@ -184,7 +198,12 @@ void Player::Draw(SDL_Renderer* renderer)
         grabAnim->Draw(renderer);
 
     }
+    for (auto it : m_listBlow) {
+        if (it->getActive()) {
+            it->Draw(renderer);
 
+        }
+    }
 }
 
 void Player::ResetCombat()
@@ -270,4 +289,7 @@ void Player::UpdateGrab(float deltaTime)
 void Player::Update(float deltaTime) {
     Entity::Update(deltaTime);
     UpdateGrab(deltaTime);
+    for (auto it : m_listBlow) {
+        it->Update(deltaTime);
+    }
 }

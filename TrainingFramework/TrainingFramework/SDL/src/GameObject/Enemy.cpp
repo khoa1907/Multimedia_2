@@ -7,6 +7,12 @@ void Enemy::Draw(SDL_Renderer* renderer)
 {
     if (m_currentGame->player->GetPosition().x >= m_position.x) it->SetFlip(SDL_FLIP_NONE);
     else it->SetFlip(SDL_FLIP_HORIZONTAL);
+
+    for (auto it : m_listBlow) {
+        if (it->getActive()) {
+            it->Draw(renderer);
+        }
+    }
     Entity::Draw(renderer);
     if (m_barContainer != nullptr) {
         Vector3 campos = Vector3(Camera::GetInstance()->GetPosition().x, Camera::GetInstance()->GetPosition().y, 0);
@@ -16,7 +22,7 @@ void Enemy::Draw(SDL_Renderer* renderer)
         m_barContainer->Draw(renderer);
         m_barFill->Draw(renderer);
     }
-
+   
 }
 void Enemy::Init() {
     Entity::Init();
@@ -43,6 +49,15 @@ void Enemy::Init() {
 
     m_barContainer->SetSize(60, 8);
     m_barFill->SetSize(60, 8);
+
+    texture = ResourceManagers::GetInstance()->GetTexture("btn_die.tga");
+    blow = std::make_shared<SpriteAnimation>(texture, 3, 4, 3, 0.2f);
+    blow->SetFlip(SDL_FLIP_NONE);
+   //blow->Set2DPosition(200, 200);
+    blow->SetSize(70, 70);
+    m_listBlow.push_back(blow);
+    blow->setActive(false);
+    
 }
 
 void Enemy::Shoot(float x, float y, GSPlay* currentGame) {
@@ -76,6 +91,10 @@ void Enemy::Update(float deltaTime) {
         m_currentCooldown = m_shootCooldown;
     }
     //
+    /*for (auto it : m_listBlow) {
+        if (it->getActive()) { printf("OKkkkkkkk"); }
+        it->Update(deltaTime);
+    }*/
 }
 
 void Enemy::SetActive(bool active)
@@ -113,5 +132,16 @@ void Enemy::SetSize(float width, float height)
 void Enemy::SetHealth(float healthChange)
 {
     Entity::SetHealth(healthChange);
+    if (m_health <= 0)
+    {  
+        blow ->Set2DPosition(300,300);
+        blow->setActive(true);
+        printf("OK");
+        for (auto it : m_listBlow) {
+            it->setActive(true);
+        }
+
+        SetActive(false);
+    }
     m_Sound->PlaySoundEffect();
 }

@@ -5,12 +5,13 @@
 #include "Tile.h"
 #include"Text.h"
 #include "Sound.h"
-
+#include <list>
 
 class TextureManager;
 class Entity : public BaseObject {
 private:
-	
+	std::list<std::shared_ptr<SpriteAnimation>>	m_listBlow;
+	std::shared_ptr<SpriteAnimation> blow;
 protected:
 	std::shared_ptr<Sprite2D> m_barContainer;
 	std::shared_ptr<Sprite2D> m_barFill;

@@ -15,7 +15,8 @@ private:
 	std::shared_ptr<SpriteAnimation> grabHand;
 	std::shared_ptr<Sound> m_Sound;
 	std::shared_ptr<Sound> m_GrabSound;
-
+	std::list<std::shared_ptr<SpriteAnimation>>	m_listBlow;
+	std::shared_ptr<SpriteAnimation> blow;
 
 	//std::shared_ptr<GSPlay> currentGame;
 	bool canShoot;

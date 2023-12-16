@@ -20,6 +20,7 @@ void Entity::Update(float deltaTime) {
         return;
     }
     it->Update(deltaTime);
+   
 
 }
 void Entity::Init()
@@ -34,6 +35,15 @@ void Entity::Init()
 
     m_frozenText->SetSize(80, 20);
     m_poisonText->SetSize(80, 20);
+
+    auto texture = ResourceManagers::GetInstance()->GetTexture("btn_die.tga");
+    blow = std::make_shared<SpriteAnimation>(texture, 3, 4, 3, 0.2f);
+    blow->SetFlip(SDL_FLIP_NONE);
+    //Vector3 i_position = this->GetPosition();
+    blow->Set2DPosition(200, 200);
+    blow->SetSize(70, 70);
+    m_listBlow.push_back(blow);
+    blow->setActive(false);
 }
 void Entity::CreateAnim(std::shared_ptr<SpriteAnimation>& tempObj, std::shared_ptr<TextureManager>& texture, int frames) {
     CreateAnim(tempObj, texture, frames, 0.2f);
@@ -70,6 +80,7 @@ void Entity::Draw(SDL_Renderer* renderer) {
         it->Set2DPosition(m_position.x - it->GetWidth() / 2, m_position.y - it->GetHeight() / 2);
         it->Draw(renderer);
     }
+    
 
    /* SDL_Rect debugBoxRect = { m_position.x - m_width / 2 - Camera::GetInstance()->GetPosition().x, m_position.y - m_height / 2 - Camera::GetInstance()->GetPosition().y, m_width, m_height };
     SDL_SetRenderDrawColor(renderer, 0xFF, 0x00, 0x00, 0xFF);
@@ -200,6 +211,9 @@ void Entity::SetHealth(float healthChange)
     m_health += healthChange;
     if (m_health <= 0)
     {
+        for (auto it : m_listBlow) {
+            it->setActive(true);
+        }
         printf("HEALTH IS 0 \n");
         SetActive(false);
     }

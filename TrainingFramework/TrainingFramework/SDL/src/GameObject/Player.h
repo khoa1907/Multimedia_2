@@ -15,6 +15,10 @@ private:
 	std::shared_ptr<SpriteAnimation> grabHand;
 	std::shared_ptr<Sound> m_Sound;
 	std::shared_ptr<Sound> m_GrabSound;
+	std::shared_ptr<Sprite2D> m_bullet;
+
+	std::shared_ptr<Sprite2D> m_bulletContainer;
+	std::shared_ptr<Sprite2D> m_bulletFill;
 
 
 	//std::shared_ptr<GSPlay> currentGame;

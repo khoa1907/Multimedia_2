@@ -85,6 +85,22 @@ void Player::Init() {
     m_barContainer->Set2DPosition(20, 35);
     m_barFill->SetSize(300, 30);
     m_barFill->Set2DPosition(50, 35);
+
+    texture = ResourceManagers::GetInstance()->GetTexture("BigBlueRR2.png");
+    m_bullet = std::make_shared<Sprite2D>(texture, SDL_FLIP_NONE);
+    m_bullet->SetSize(20, 20);
+    m_bullet->Set2DPosition(20, 75);
+
+    texture = ResourceManagers::GetInstance()->GetTexture("bar_container.png");
+    m_bulletContainer = std::make_shared<Sprite2D>(texture, SDL_FLIP_NONE);
+
+    texture = ResourceManagers::GetInstance()->GetTexture("bar_fill.png");
+    m_bulletFill = std::make_shared<Sprite2D>(texture, SDL_FLIP_NONE);
+
+    m_bulletContainer->SetSize(100, 20);
+    m_bulletContainer->Set2DPosition(20, 75);
+    m_bulletFill->SetSize(0, 20);
+    m_bulletFill->Set2DPosition(50, 75);
 }
 void Player::ProcessInput(int keyPress) {
     if (m_currentFrozenCooldown > 0) return;
@@ -113,6 +129,7 @@ void Player::Shoot(int x, int y, GSPlay* currentGame) {
         m_bulletStats.bulletType = 0;
         m_bulletStats.speed = 0;
         canShoot = false;
+        m_bulletFill->SetSize(0 ,m_bulletContainer->GetHeight());
     }
 }
 
@@ -130,6 +147,7 @@ void Player::CheckCollision(Entity* other)
             canShoot = true;
             m_bulletStats.damage += other->GetHealth();
             if (m_bulletStats.damage > m_maxDamage) m_bulletStats.damage = m_maxDamage;
+            m_bulletFill->SetSize(m_bulletContainer->GetWidth() * m_bulletStats.damage / m_maxDamage ,m_bulletContainer->GetHeight());
             float growthRatio = 1;
             if (m_bulletStats.sizeX > 0) growthRatio = 0.5f;
             m_bulletStats.sizeX += other->GetSize().x * growthRatio;
@@ -175,6 +193,9 @@ void Player::Draw(SDL_Renderer* renderer)
     Entity::Draw(renderer);
     m_barContainer->Draw(renderer);
     m_barFill->Draw(renderer);
+    m_bulletContainer->Draw(renderer);
+    m_bulletFill->Draw(renderer);
+    m_bullet->Draw(renderer);
     grabHand->Draw(renderer);
     if (isGrabbing) {
         /*SDL_Rect debugBoxRect = { m_grabStats.grabPos.x - m_grabStats.grabSize.x / 2, m_grabStats.grabPos.y - m_grabStats.grabSize.y / 2, m_grabStats.grabSize.x,  m_grabStats.grabSize.y };

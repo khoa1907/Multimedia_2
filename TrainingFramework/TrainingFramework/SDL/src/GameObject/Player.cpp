@@ -42,7 +42,7 @@ void Player::Init() {
 
     m_GrabSound = std::make_shared<Sound>();
     m_GrabSound->LoadSound("Data/Sounds/Retro Blop 18.wav");
-    SetInitialHealth(440);
+    SetInitialHealth(900);
 
     m_frozenResistance = 2.0f;
     m_poisonResistance = 1.0f;

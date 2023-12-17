@@ -130,15 +130,15 @@ void Bullet::SetStatusEffect(int statusType)
 void Bullet::CloneBullets()
 {
 	printf("Cloned %d\n", m_bulletEffect);
-	EnemyManager::GetInstance()->m_currentGame->AddBullet(m_position, Vector3(1, 1, 0), 9, layerID);
-	EnemyManager::GetInstance()->m_currentGame->AddBullet(m_position, Vector3(1, -1, 0), 9, layerID);
-	EnemyManager::GetInstance()->m_currentGame->AddBullet(m_position, Vector3(-1, 1, 0), 9, layerID);
-	EnemyManager::GetInstance()->m_currentGame->AddBullet(m_position, Vector3(-1, -1, 0), 9, layerID);
+	EnemyManager::GetInstance()->m_currentGame->AddBullet(m_position, Vector3(1, 1, 0), rand() % 8, layerID);
+	EnemyManager::GetInstance()->m_currentGame->AddBullet(m_position, Vector3(1, -1, 0), rand() % 8, layerID);
+	EnemyManager::GetInstance()->m_currentGame->AddBullet(m_position, Vector3(-1, 1, 0), rand() % 8, layerID);
+	EnemyManager::GetInstance()->m_currentGame->AddBullet(m_position, Vector3(-1, -1, 0), rand() % 8, layerID);
 
-	EnemyManager::GetInstance()->m_currentGame->AddBullet(m_position, Vector3(0, -1, 0), 10, layerID);
-	EnemyManager::GetInstance()->m_currentGame->AddBullet(m_position, Vector3(-1, 0, 0), 11, layerID);
-	EnemyManager::GetInstance()->m_currentGame->AddBullet(m_position, Vector3(1, 0, 0), 11, layerID);
-	EnemyManager::GetInstance()->m_currentGame->AddBullet(m_position, Vector3(0, 1, 0), 10, layerID);
+	// EnemyManager::GetInstance()->m_currentGame->AddBullet(m_position, Vector3(0, -1, 0), rand() % 8, layerID);
+	// EnemyManager::GetInstance()->m_currentGame->AddBullet(m_position, Vector3(-1, 0, 0), rand() % 8, layerID);
+	// EnemyManager::GetInstance()->m_currentGame->AddBullet(m_position, Vector3(1, 0, 0), rand() % 8, layerID);
+	// EnemyManager::GetInstance()->m_currentGame->AddBullet(m_position, Vector3(0, 1, 0), rand() % 8, layerID);
 }
 
 void Bullet::SetHealth(float healthChange)

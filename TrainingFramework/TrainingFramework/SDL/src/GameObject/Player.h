@@ -71,6 +71,6 @@ public:
 	void SetGrabStats(GrabStats grabStats);
 	void SetFrozen();
 	void SetHealth(float healthChange); // Health
-
+	void SetMaxHealth(float healthChange); // max health
 
 };

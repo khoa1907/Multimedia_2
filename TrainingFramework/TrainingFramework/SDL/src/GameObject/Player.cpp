@@ -42,7 +42,7 @@ void Player::Init() {
 
     m_GrabSound = std::make_shared<Sound>();
     m_GrabSound->LoadSound("Data/Sounds/Retro Blop 18.wav");
-    SetInitialHealth(900);
+    SetInitialHealth(500);
 
     m_frozenResistance = 2.0f;
     m_poisonResistance = 1.0f;
@@ -227,8 +227,9 @@ void Player::ResetCombat()
     m_bulletStats.speed = 300;
     m_bulletStats.lifeTime = 6.0f;
 
-    SetHealth(m_maxHealth * 0.2f);
+    SetHealth(m_maxHealth * 0.3f);
     m_health = std::min(m_health, m_maxHealth);
+    printf("Reset Combat: health: %.2f max: %.2f \n", m_health, m_maxHealth);
     SetHealth(0.0f);
     m_bulletStats.bulletType = 0;
 
@@ -260,6 +261,10 @@ void Player::SetHealth(float healthChange)
     m_Sound->PlaySoundEffect();
 }
 
+void Player::SetMaxHealth(float healthChange)
+{
+    m_maxHealth += healthChange;
+}
 
 
 void Player::UpdateGrab(float deltaTime)

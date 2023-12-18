@@ -410,6 +410,7 @@ void GSPlay::AddBullet(float lifetime, float damage, float movementSpeed, Vector
 void GSPlay::NextLevel()
 {
 	UnloadCurrentLevel();
+	player->SetMaxHealth(100.0f);
 	LoadLevel(m_currentLevel + 1);
 	isLevelChanged = false;
 }

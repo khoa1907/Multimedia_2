@@ -123,7 +123,7 @@ void GSPlay::Init()
 	Camera::GetInstance()->SetTarget(m_entities.back());
 
 	GenerateBullets(30);
-	if (GameStateMachine::GetInstance()->newGame) LoadLevel(1); 
+	if (GameStateMachine::GetInstance()->newGame) LoadLevel(2); 
 	else LoadGame();
 	// player->SetPosition(m_tilemap->m_playerSpawnPos);
 
